@@ -71,3 +71,18 @@ public class Pom_addtocart {
 	public static WebElement product;
 	
  } 
+
+
+package PageObjectmodels;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class Pom_purchased {
+
+	@FindBy(id="qnty107")
+	public static WebElement quantity;
+	@FindBy(xpath="//*[@id=\'mcontent\']/div[3]/div/div/div[1]/div[2]/div[1]/div[3]/a")
+	public static WebElement added;
+}
+
