@@ -1,0 +1,54 @@
+package Commonfunctions;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+public class commonfnctions {
+	public static Properties property;
+	public static WebDriver d;
+	
+	public Properties loadproperty() throws IOException
+	{
+		FileInputStream File = new FileInputStream("config.properties");
+	    property = new Properties();
+		property.load(File);
+		return property;
+		
+	}
+	@BeforeSuite
+	public void LaunchBrowser() throws IOException
+	{
+		loadproperty();
+		String browsername = property.getProperty("browser");
+		String url = property.getProperty("url");
+		String DriverLocation = property.getProperty("DriverLocation");
+		
+		if(browsername.equalsIgnoreCase("chrome"))
+		{
+			System.setProperty("webdriver.chrome.driver",DriverLocation);
+		 d = new ChromeDriver();
+		}else if(browsername.equalsIgnoreCase("Firefox"))
+		{
+			System.setProperty("webdriver.gecko.driver",
+					DriverLocation);
+		 d = new FirefoxDriver();
+		}
+		d.manage().window().maximize();
+		d.get(url);
+		d.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	}
+	@AfterSuite
+	public void CloseBrowser()
+	{
+		
+	}
+
+}
