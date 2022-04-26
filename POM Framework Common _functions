@@ -70,4 +70,4 @@ public class Pom_addtocart {
 	@FindBy(xpath="/html/body/header/div/div/div/div/div[2]/div/ul/li[1]/div/div[1]/ul/li[1]/a")
 	public static WebElement product;
 	
-}
+ } 
